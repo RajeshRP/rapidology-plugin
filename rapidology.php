@@ -1812,6 +1812,7 @@ SOL;
 								<option value="mailchimp">%3$s</option>
 								<option value="mailpoet">%11$s</option>
 								<option value="ontraport">%13$s</option>
+								<option value="retainly">%24$s</option>
 								<option value="salesforce">%18$s</option>
 								<option value="sendinblue">%10$s</option>
 							</select>
@@ -1842,7 +1843,8 @@ SOL;
 				esc_html__( 'HubSpot Standard', 'rapidology'),#20
 				esc_html__( 'Redirect Button', 'rapidology'),#21
 				esc_html__( 'ConvertKit', 'rapidology' ),#22
-                esc_html__( 'Drip', 'rapidology')#23
+                esc_html__( 'Drip', 'rapidology'),#23
+                esc_html__( 'Retainly', 'retainly')#24
 
 			);
 		}
@@ -2907,6 +2909,11 @@ SOL;
 								$error_message = $convertkit->get_convertkit_lists( $details['api_key'], $name );
 								break;
 
+							case 'retainly' :
+								$retainly = new rapidology_retainly();
+								$error_message = $retainly->get_retainly_lists( $details['api_key'], $name );
+								break;	
+
 						}
 					}
 
@@ -3074,7 +3081,10 @@ SOL;
 				$convertkit = new rapidology_convertkit();
 				$error_message = $convertkit->get_convertkit_lists( $api_key, $name );
 				break;
-
+			case 'retainly':
+				$retainly = new rapidology_retainly();
+				$error_message = $retainly->get_retainly_lists( $api_key, $name );
+				break;	
 
 		}
 
@@ -3245,6 +3255,11 @@ SOL;
 				$api_key       = $options_array['accounts'][ $service ][ $account_name ]['api_key'];
 				$convertkit = new rapidology_convertkit();
 				$error_message = $convertkit->subscribe_convertkit( $api_key, $list_id, $email, $name, $last_name, $dbl_optin );
+				break;
+				case 'retainly' :
+				$api_key       = $options_array['accounts'][ $service ][ $account_name ]['api_key'];
+				$retainly = new rapidology_retainly();
+				$error_message = $retainly->subscribe_retainly( $api_key, $list_id, $email, $name, $last_name, $dbl_optin );
 				break;
 			}
 		} else {
@@ -3497,6 +3512,11 @@ SOL;
 				$convertkit = new rapidology_convertkit();
 				$form_fields = $convertkit->draw_convertkit_form($form_fields, $service, $field_values);
 				break;
+
+			case 'retainly' :
+				$retainly = new rapidology_retainly();
+				$form_fields = $retainly->draw_retainly_form($form_fields, $service, $field_values);
+				break;	
 
 		}
 

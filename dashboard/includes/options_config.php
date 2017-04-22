@@ -24,6 +24,7 @@ $email_providers_array = array(
 	'mailchimp'         =>  'MailChimp' ,
 	'mailpoet'			=>  'MailPoet' ,
 	'ontraport'			=>  'Ontraport' ,
+	'retainly'			=>	'Retainly',
 	'salesforce'		=>  'Salesforce' ,
 	'sendinblue'		=>  'Sendinblue' ,
 );
@@ -57,7 +58,8 @@ $show_name_fields =  array(
 	'hubspot-standard',
 	'emma',
 	'convertkit',
-	'drip'
+	'drip',
+	'retainly'
 );
 
 
